@@ -28,7 +28,7 @@ extensions = [
 
 and set your [default bibliography style](https://sphinxcontrib-bibtex.readthedocs.io/en/stable/usage.html#bibliography-style) to `"unsrt_et_al"`:
 
-```
+```python
 bibtex_default_style = "unsrt_et_al"
 ```
 
