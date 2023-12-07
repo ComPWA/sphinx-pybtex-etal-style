@@ -38,3 +38,9 @@ Alternatively, you can use the style for one bibliography only by specifying it 
 .. bibliography:: /references.bib
   :style: unsrt_et_al
 ```
+
+Book entries that have an ISBN get a link to the book entry on [bookfinder.com](https://bookfinder.com/search). If you want to use [isbnsearch.org](https://isbnsearch.org) instead, add the following to your `conf.py`:
+
+```python
+unsrt_etal_isbn_resolver = "isbnsearch"
+```

@@ -29,8 +29,10 @@
   ],
   "ignoreWords": [
     "PyPI",
+    "bookfinder",
     "commitlint",
     "etal",
+    "isbnsearch",
     "prereleased",
     "rtfd",
     "sphinxcontrib",
