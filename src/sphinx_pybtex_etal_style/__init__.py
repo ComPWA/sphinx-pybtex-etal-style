@@ -1,7 +1,8 @@
 # pyright: reportMissingTypeStubs=false
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Any
+import sys
+from typing import TYPE_CHECKING, Any, ClassVar
 
 from pybtex.plugin import register_plugin
 from pybtex.richtext import Tag, Text
@@ -22,9 +23,18 @@ if TYPE_CHECKING:
     from pybtex.database import Entry
     from sphinx.application import Sphinx
     from sphinx.environment import BuildEnvironment
+if sys.version_info < (3, 8):
+    from typing_extensions import Literal
+else:
+    from typing import Literal
+
+ISBNResolvers = Literal["bookfinder", "isbnsearch"]
 
 
 def setup(app: Sphinx) -> dict[str, Any]:
+    app.add_config_value(
+        "unsrt_etal_isbn_resolver", default="bookfinder", rebuild="env"
+    )
     app.connect("config-inited", register_style)
     return {
         "parallel_read_safe": True,
@@ -32,7 +42,8 @@ def setup(app: Sphinx) -> dict[str, Any]:
     }
 
 
-def register_style(_: Sphinx, __: BuildEnvironment) -> None:
+def register_style(app: Sphinx, __: BuildEnvironment) -> None:
+    MyStyle.isbn_resolver = app.config.unsrt_etal_isbn_resolver
     register_plugin("pybtex.style.formatting", "unsrt_et_al", MyStyle)
 
 
@@ -74,6 +85,8 @@ def names(children, context, role, **kwargs):  # type: ignore[no-untyped-def]
 
 
 class MyStyle(UnsrtStyle):
+    isbn_resolver: ClassVar[ISBNResolvers] = "bookfinder"
+
     def __init__(self) -> None:
         super().__init__(abbreviate_names=True)
 
@@ -99,16 +112,22 @@ class MyStyle(UnsrtStyle):
         ]
 
     def format_isbn(self, e: Entry) -> Node:
-        return href[
-            join[
-                "https://isbnsearch.org/isbn/",
-                field("isbn", raw=True, apply_func=remove_dashes_and_spaces),
-            ],
-            join[
-                "ISBN:",
-                field("isbn", raw=True),
-            ],
-        ]
+        raw_isbn = field("isbn", raw=True, apply_func=remove_dashes_and_spaces)
+        if self.isbn_resolver == "bookfinder":
+            url = join[
+                "https://www.bookfinder.com/search/?isbn=",
+                raw_isbn,
+                "&mode=isbn&st=sr&ac=qr",
+            ]
+        elif self.isbn_resolver == "isbnsearch":
+            url = join["https://isbnsearch.org/isbn/", raw_isbn]
+        else:
+            msg = (
+                f"Unknown unsrt_etal_isbn_resolver: {self.isbn_resolver}. Valid options"
+                f" are {', '.join(ISBNResolvers.__args__)}."
+            )
+            raise NotImplementedError(msg)
+        return href[url, join["ISBN:", field("isbn", raw=True)]]
 
 
 def remove_dashes_and_spaces(isbn: str) -> str:
