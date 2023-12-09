@@ -40,7 +40,7 @@ repos:
       - id: black
 
   - repo: https://github.com/ComPWA/repo-maintenance
-    rev: 0.1.7
+    rev: 0.1.9
     hooks:
       - id: check-dev-files
         args:
@@ -51,7 +51,7 @@ repos:
           - --repo-title=sphinx-pybtex-etal-style
 
   - repo: https://github.com/streetsidesoftware/cspell-cli
-    rev: v8.0.0
+    rev: v8.1.1
     hooks:
       - id: cspell
 
@@ -76,17 +76,17 @@ repos:
           - python
 
   - repo: https://github.com/pre-commit/mirrors-prettier
-    rev: v4.0.0-alpha.3
+    rev: v4.0.0-alpha.3-1
     hooks:
       - id: prettier
 
   - repo: https://github.com/ComPWA/mirrors-pyright
-    rev: v1.1.338
+    rev: v1.1.339
     hooks:
       - id: pyright
 
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.1.6
+    rev: v0.1.7
     hooks:
       - id: ruff
         args: [--fix]
