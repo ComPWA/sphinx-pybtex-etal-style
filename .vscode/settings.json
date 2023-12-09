@@ -20,7 +20,7 @@
   },
   "[python]": {
     "editor.codeActionsOnSave": {
-      "source.organizeImports": true
+      "source.organizeImports": "explicit"
     },
     "editor.defaultFormatter": "ms-python.black-formatter",
     "editor.rulers": [88]
@@ -45,6 +45,7 @@
   "git.rebaseWhenSync": true,
   "github-actions.workflows.pinned.refresh.enabled": true,
   "github-actions.workflows.pinned.workflows": [".github/workflows/ci.yml"],
+  "multiDiffEditor.experimental.enabled": true,
   "mypy-type-checker.args": ["--config-file=${workspaceFolder}/pyproject.toml"],
   "mypy-type-checker.importStrategy": "fromEnvironment",
   "python.analysis.autoImportCompletions": false,
@@ -52,11 +53,5 @@
   "python.testing.unittestEnabled": false,
   "rewrap.wrappingColumn": 88,
   "ruff.enable": true,
-  "ruff.organizeImports": true,
-  "search.exclude": {
-    "**/tests/**/__init__.py": true,
-    "*/.pydocstyle": true,
-    "src/*/*/__init__.py": true,
-    "src/*/__init__.py": true
-  }
+  "ruff.organizeImports": true
 }
