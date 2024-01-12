@@ -35,12 +35,12 @@ repos:
       - id: trailing-whitespace
 
   - repo: https://github.com/psf/black-pre-commit-mirror
-    rev: 23.11.0
+    rev: 23.12.1
     hooks:
       - id: black
 
-  - repo: https://github.com/ComPWA/repo-maintenance
-    rev: 0.1.9
+  - repo: https://github.com/ComPWA/policy
+    rev: 0.2.0
     hooks:
       - id: check-dev-files
         args:
@@ -51,7 +51,7 @@ repos:
           - --repo-title=sphinx-pybtex-etal-style
 
   - repo: https://github.com/streetsidesoftware/cspell-cli
-    rev: v8.1.1
+    rev: v8.3.0
     hooks:
       - id: cspell
 
@@ -76,17 +76,17 @@ repos:
           - python
 
   - repo: https://github.com/pre-commit/mirrors-prettier
-    rev: v4.0.0-alpha.3-1
+    rev: v4.0.0-alpha.8
     hooks:
       - id: prettier
 
   - repo: https://github.com/ComPWA/mirrors-pyright
-    rev: v1.1.339
+    rev: v1.1.345
     hooks:
       - id: pyright
 
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.1.7
+    rev: v0.1.13
     hooks:
       - id: ruff
         args: [--fix]
