@@ -96,4 +96,3 @@ repos:
     rev: v1.1.356
     hooks:
       - id: pyright
-
