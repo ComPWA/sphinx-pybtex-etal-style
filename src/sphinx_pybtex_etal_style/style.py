@@ -11,7 +11,7 @@ from pybtex.style.formatting.unsrt import Style as UnsrtStyle
 from pybtex.style.template import (
     FieldIsMissing,
     Node,
-    _format_list,  # pyright: ignore[reportPrivateUsage]
+    _format_list,  # pyright: ignore[reportPrivateUsage]  # noqa: PLC2701
     field,
     href,
     join,
@@ -74,20 +74,20 @@ class UnsrtEtAl(UnsrtStyle):
     def __init__(self) -> None:
         super().__init__(abbreviate_names=True)
 
-    def format_names(self, role: Entry, as_sentence: bool = True) -> Node:
+    def format_names(self, role: Entry, as_sentence: bool = True) -> Node:  # noqa: PLR6301
         formatted_names = names(role, sep=", ", sep2=" and ", last_sep=", and ")
         if as_sentence:
             return sentence[formatted_names]
         return formatted_names
 
     def format_eprint(self, e: Entry) -> Node:
-        if "doi" in e.fields:
-            return ""
+        if "doi" in e.fields:  # pyright:ignore[reportOperatorIssue]
+            return ""  # pyright:ignore[reportReturnType]
         return super().format_eprint(e)
 
-    def format_url(self, e: Entry) -> Node:
-        if "doi" in e.fields or "eprint" in e.fields:
-            return ""
+    def format_url(self, e: Entry) -> Node:  # noqa: PLR6301
+        if "doi" in e.fields or "eprint" in e.fields:  # pyright:ignore[reportOperatorIssue]
+            return ""  # pyright:ignore[reportReturnType]
         return words[
             href[
                 field("url", raw=True),
@@ -108,7 +108,7 @@ class UnsrtEtAl(UnsrtStyle):
         else:
             msg = (
                 f"Unknown unsrt_etal_isbn_resolver: {self.isbn_resolver}. Valid options"
-                f" are {', '.join(ISBNResolvers.__args__)}."
+                f" are {', '.join(ISBNResolvers.__args__)}."  # pyright:ignore[reportAttributeAccessIssue]
             )
             raise NotImplementedError(msg)
         return href[url, join["ISBN:", field("isbn", raw=True)]]
