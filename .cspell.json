@@ -50,6 +50,7 @@
     "conda",
     "mypy",
     "pybtex",
+    "PyPA",
     "PYTHONHASHSEED",
     "SymPy"
   ]
