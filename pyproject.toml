@@ -135,7 +135,7 @@ line-ending = "lf"
 
 [tool.ruff.lint]
 ignore = [
-    "ANN401",
+    "ANN",
     "COM812",
     "CPY001",
     "D101",
@@ -150,6 +150,7 @@ ignore = [
     "D416",
     "DOC",
     "E501",
+    "FBT",
     "FURB101",
     "FURB103",
     "FURB140",

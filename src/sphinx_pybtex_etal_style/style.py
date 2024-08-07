@@ -95,7 +95,7 @@ class UnsrtEtAl(UnsrtStyle):
             ]
         ]
 
-    def format_isbn(self, e: Entry) -> Node:
+    def format_isbn(self, e: Entry) -> Node:  # noqa: ARG002
         raw_isbn = field("isbn", raw=True, apply_func=remove_dashes_and_spaces)
         if self.isbn_resolver == "bookfinder":
             url = join[
