@@ -3,8 +3,7 @@
 # pyright: reportMissingTypeStubs=false
 from __future__ import annotations
 
-import sys
-from typing import TYPE_CHECKING, ClassVar
+from typing import TYPE_CHECKING, ClassVar, Literal
 
 from pybtex.richtext import Tag, Text
 from pybtex.style.formatting.unsrt import Style as UnsrtStyle
@@ -22,10 +21,6 @@ from pybtex.style.template import (
 
 if TYPE_CHECKING:
     from pybtex.database import Entry
-if sys.version_info < (3, 8):
-    from typing_extensions import Literal
-else:
-    from typing import Literal
 
 
 ISBNResolvers = Literal["bookfinder", "isbnsearch"]
