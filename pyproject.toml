@@ -46,7 +46,7 @@ mypy = [
     "mypy",
 ]
 sty = [
-    "pre-commit >=1.4.0",
+    "pre-commit-uv",
     "ruff",
     "sphinx-pybtex-etal-style[format]",
     "sphinx-pybtex-etal-style[lint]",
@@ -75,6 +75,8 @@ namespaces = false
 where = ["src"]
 
 [tool.setuptools_scm]
+local_scheme = "no-local-version"
+version_scheme = "only-version"
 write_to = "src/version.py"
 
 [tool.coverage.run]
@@ -102,6 +104,7 @@ exclude = [
     "**/.mypy_cache",
     "**/.pytest_cache",
     "**/.tox",
+    "**/.venv/",
     "**/__pycache__",
     "**/_build",
 ]
@@ -122,10 +125,10 @@ reportUnusedVariable = true
 typeCheckingMode = "strict"
 
 [tool.ruff]
+extend-include = ["*.ipynb"]
 preview = true
 show-fixes = true
 src = ["src"]
-target-version = "py39"
 
 [tool.ruff.format]
 docstring-code-format = true
@@ -163,10 +166,32 @@ ignore = [
 select = ["ALL"]
 task-tags = ["cspell"]
 
+[tool.ruff.lint.flake8-builtins]
+builtins-ignorelist = ["display"]
+
+[tool.ruff.lint.flake8-comprehensions]
+allow-dict-calls-with-keyword-arguments = true
+
 [tool.ruff.lint.isort]
 split-on-trailing-comma = false
 
 [tool.ruff.lint.per-file-ignores]
+"*.ipynb" = [
+    "B018",
+    "C90",
+    "D",
+    "E303",
+    "E703",
+    "N806",
+    "N816",
+    "PLR09",
+    "PLR2004",
+    "PLW0602",
+    "PLW0603",
+    "S101",
+    "T20",
+    "TCH00",
+]
 "setup.py" = ["D100"]
 "tests/*" = [
     "D",
@@ -190,6 +215,5 @@ sort_first = [
     "tool.setuptools",
     "tool.setuptools_scm",
 ]
-sort_table_keys = true
 spaces_indent_inline_array = 4
 trailing_comma_inline_array = true
