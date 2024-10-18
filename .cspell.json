@@ -21,6 +21,7 @@
   "ignorePaths": [
     "**/.cspell.json",
     ".editorconfig",
+    ".envrc",
     ".gitignore",
     ".pre-commit-config.yaml",
     ".prettierignore",
@@ -36,7 +37,8 @@
     "prereleased",
     "rtfd",
     "sphinxcontrib",
-    "unsrt"
+    "unsrt",
+    "venv"
   ],
   "language": "en-US",
   "version": "0.2",
