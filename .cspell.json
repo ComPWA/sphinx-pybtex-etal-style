@@ -53,6 +53,7 @@
     "mypy",
     "pybtex",
     "PyPA",
+    "pyproject",
     "PYTHONHASHSEED",
     "SymPy"
   ]

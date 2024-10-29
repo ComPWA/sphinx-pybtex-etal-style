@@ -103,7 +103,7 @@ class UnsrtEtAl(UnsrtStyle):
         else:
             msg = (
                 f"Unknown unsrt_etal_isbn_resolver: {self.isbn_resolver}. Valid options"
-                f" are {', '.join(ISBNResolvers.__args__)}."  # pyright:ignore[reportAttributeAccessIssue]
+                f" are {', '.join(ISBNResolvers.__args__)}."
             )
             raise NotImplementedError(msg)
         return href[url, join["ISBN:", field("isbn", raw=True)]]
