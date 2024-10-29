@@ -35,22 +35,6 @@ maintainers = [{email = "compwa-admin@ep1.rub.de"}]
 name = "sphinx-pybtex-etal-style"
 requires-python = ">=3.9"
 
-[project.optional-dependencies]
-dev = ["sphinx-pybtex-etal-style[sty]"]
-lint = [
-    "ruff",
-    "sphinx-pybtex-etal-style[mypy]",
-]
-mypy = [
-    "Sphinx",
-    "mypy",
-]
-sty = [
-    "ruff",
-    "sphinx-pybtex-etal-style[format]",
-    "sphinx-pybtex-etal-style[lint]",
-]
-
 [project.readme]
 content-type = "text/markdown"
 file = "README.md"
@@ -60,6 +44,17 @@ Changelog = "https://github.com/ComPWA/sphinx-pybtex-etal-style/releases"
 Documentation = "https://github.com/ComPWA/sphinx-pybtex-etal-style/blob/main/README.md"
 Source = "https://github.com/ComPWA/sphinx-pybtex-etal-style"
 Tracker = "https://github.com/ComPWA/sphinx-pybtex-etal-style/issues"
+
+[dependency-groups]
+dev = [
+    "ruff",
+    {include-group = "style"},
+]
+style = [
+    "mypy",
+    {include-group = "types"},
+]
+types = ["sphinx"]
 
 [tool.setuptools]
 include-package-data = true
