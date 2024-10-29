@@ -46,7 +46,6 @@ mypy = [
     "mypy",
 ]
 sty = [
-    "pre-commit-uv",
     "ruff",
     "sphinx-pybtex-etal-style[format]",
     "sphinx-pybtex-etal-style[lint]",
