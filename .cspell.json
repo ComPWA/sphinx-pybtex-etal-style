@@ -56,5 +56,6 @@
     "pyproject",
     "PYTHONHASHSEED",
     "SymPy"
-  ]
+  ],
+  "useGitignore": true
 }
