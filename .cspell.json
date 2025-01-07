@@ -41,6 +41,7 @@
     "venv"
   ],
   "language": "en-US",
+  "useGitignore": true,
   "version": "0.2",
   "words": [
     "ampform",
@@ -55,6 +56,5 @@
     "PyPA",
     "pyproject",
     "SymPy"
-  ],
-  "useGitignore": true
+  ]
 }
