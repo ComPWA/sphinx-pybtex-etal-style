@@ -54,7 +54,6 @@
     "pybtex",
     "PyPA",
     "pyproject",
-    "PYTHONHASHSEED",
     "SymPy"
   ],
   "useGitignore": true
