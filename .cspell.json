@@ -25,6 +25,7 @@
     ".gitignore",
     ".pre-commit-config.yaml",
     ".prettierignore",
+    ".taplo.toml",
     ".vscode/*",
     "pyproject.toml"
   ],
@@ -41,6 +42,7 @@
     "venv"
   ],
   "language": "en-US",
+  "useGitignore": true,
   "version": "0.2",
   "words": [
     "ampform",
@@ -54,7 +56,6 @@
     "pybtex",
     "PyPA",
     "pyproject",
-    "PYTHONHASHSEED",
     "SymPy"
   ]
 }
