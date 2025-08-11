@@ -48,6 +48,7 @@ Tracker = "https://github.com/ComPWA/sphinx-pybtex-etal-style/issues"
 
 [dependency-groups]
 dev = [
+    "poethepoet",
     "ruff",
     {include-group = "style"},
 ]
@@ -89,6 +90,18 @@ warn_unused_configs = true
 [[tool.mypy.overrides]]
 ignore_missing_imports = true
 module = ["pybtex.*"]
+
+[tool.poe]
+executor.type = "uv"
+
+[tool.poe.tasks.all]
+help = "Run all continuous integration (CI) tasks locally"
+ignore_fail = "return_non_zero"
+sequence = ["style"]
+
+[tool.poe.tasks.style]
+cmd = "uv run --group style --isolated --no-dev pre-commit run --all-files"
+help = "Perform all linting, formatting, and spelling checks"
 
 [tool.pyright]
 reportGeneralTypeIssues = false
