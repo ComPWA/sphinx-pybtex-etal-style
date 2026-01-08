@@ -3,8 +3,7 @@ ci:
   autoupdate_commit_msg: "MAINT: upgrade lock files"
   autoupdate_schedule: quarterly
   skip:
-    - mypy
-    - pyright
+    - ty
 
 repos:
   - repo: meta
@@ -18,8 +17,7 @@ repos:
       - id: check-dev-files
         args:
           - --repo-name=sphinx-pybtex-etal-style
-          - --type-checker=mypy
-          - --type-checker=pyright
+          - --type-checker=ty
 
   - repo: https://github.com/astral-sh/ruff-pre-commit
     rev: v0.14.10
@@ -84,14 +82,10 @@ repos:
 
   - repo: local
     hooks:
-      - id: mypy
-        name: mypy
-        entry: mypy
-        language: system
+      - id: ty
+        name: ty
+        entry: ty check
+        args: [--output-format=concise]
         require_serial: true
-        types: [python]
-
-  - repo: https://github.com/ComPWA/pyright-pre-commit
-    rev: v1.1.407
-    hooks:
-      - id: pyright
+        language: system
+        types_or: [python, pyi, jupyter]
