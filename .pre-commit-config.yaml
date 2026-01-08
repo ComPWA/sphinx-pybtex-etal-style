@@ -13,11 +13,13 @@ repos:
       - id: check-useless-excludes
 
   - repo: https://github.com/ComPWA/policy
-    rev: 0.7.5
+    rev: 0.8.1
     hooks:
       - id: check-dev-files
         args:
           - --repo-name=sphinx-pybtex-etal-style
+          - --type-checker=mypy
+          - --type-checker=pyright
 
   - repo: https://github.com/astral-sh/ruff-pre-commit
     rev: v0.14.10
@@ -86,8 +88,8 @@ repos:
         name: mypy
         entry: mypy
         language: system
-        types:
-          - python
+        require_serial: true
+        types: [python]
 
   - repo: https://github.com/ComPWA/pyright-pre-commit
     rev: v1.1.407

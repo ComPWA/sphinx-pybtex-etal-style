@@ -48,7 +48,6 @@ Tracker = "https://github.com/ComPWA/sphinx-pybtex-etal-style/issues"
 
 [dependency-groups]
 dev = [
-    "poethepoet",
     "ruff",
     {include-group = "style"},
 ]
