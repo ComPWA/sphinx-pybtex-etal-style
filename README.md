@@ -44,3 +44,9 @@ Book entries that have an ISBN get a link to the book entry on [bookfinder.com](
 ```python
 unsrt_etal_isbn_resolver = "isbnsearch"
 ```
+
+To activate LaTeX math support in bibliographies (e.g. via MathJax), add the following to your `conf.py`:
+
+```python
+bibtex_use_mathjax = True
+```

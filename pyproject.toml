@@ -55,7 +55,10 @@ style = [
     "ty",
     {include-group = "types"},
 ]
-types = ["sphinx"]
+types = [
+    "pybtex-docutils",
+    "sphinx",
+]
 
 [tool.setuptools]
 include-package-data = true
