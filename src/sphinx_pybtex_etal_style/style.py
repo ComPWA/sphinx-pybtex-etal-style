@@ -1,6 +1,5 @@
 """Style definition for :code:`unsrt_etal`."""
 
-# pyright: reportMissingTypeStubs=false
 from __future__ import annotations
 
 from typing import TYPE_CHECKING, ClassVar, Literal
@@ -10,7 +9,7 @@ from pybtex.style.formatting.unsrt import Style as UnsrtStyle
 from pybtex.style.template import (
     FieldIsMissing,
     Node,
-    _format_list,  # pyright: ignore[reportPrivateUsage]  # noqa: PLC2701
+    _format_list,  # noqa: PLC2701
     field,
     href,
     join,
@@ -28,7 +27,7 @@ ISBNResolvers = Literal["bookfinder", "isbnsearch"]
 
 # Specify bibliography style
 @node
-def et_al(children, data, sep="", sep2=None, last_sep=None):  # type: ignore[no-untyped-def]
+def et_al(children, data, sep="", sep2=None, last_sep=None):
     if sep2 is None:
         sep2 = sep
     if last_sep is None:
@@ -44,7 +43,7 @@ def et_al(children, data, sep="", sep2=None, last_sep=None):  # type: ignore[no-
 
 
 @node
-def names(children, context, role, **kwargs):  # type: ignore[no-untyped-def]
+def names(children, context, role, **kwargs):
     """Return formatted names."""
     if children:
         msg = "The names field should not contain any children"
@@ -58,9 +57,7 @@ def names(children, context, role, **kwargs):  # type: ignore[no-untyped-def]
     formatted_names = [
         style.format_name(person, style.abbreviate_names) for person in persons
     ]
-    return et_al(**kwargs)[  # pyright: ignore[reportUntypedBaseClass]
-        formatted_names
-    ].format_data(context)
+    return et_al(**kwargs)[formatted_names].format_data(context)
 
 
 class UnsrtEtAl(UnsrtStyle):
@@ -76,13 +73,13 @@ class UnsrtEtAl(UnsrtStyle):
         return formatted_names
 
     def format_eprint(self, e: Entry) -> Node:
-        if "doi" in e.fields:  # pyright:ignore[reportOperatorIssue]
-            return ""  # pyright:ignore[reportReturnType]
+        if e.fields is None or "doi" in e.fields:
+            return ""  # ty:ignore[invalid-return-type]
         return super().format_eprint(e)
 
     def format_url(self, e: Entry) -> Node:  # noqa: PLR6301
-        if "doi" in e.fields or "eprint" in e.fields:  # pyright:ignore[reportOperatorIssue]
-            return ""  # pyright:ignore[reportReturnType]
+        if e.fields is None or "doi" in e.fields or "eprint" in e.fields:
+            return ""  # ty:ignore[invalid-return-type]
         return words[
             href[
                 field("url", raw=True),

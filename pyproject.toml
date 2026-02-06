@@ -48,15 +48,17 @@ Tracker = "https://github.com/ComPWA/sphinx-pybtex-etal-style/issues"
 
 [dependency-groups]
 dev = [
-    "poethepoet",
     "ruff",
     {include-group = "style"},
 ]
 style = [
-    "mypy",
+    "ty",
     {include-group = "types"},
 ]
-types = ["sphinx"]
+types = [
+    "pybtex-docutils",
+    "sphinx",
+]
 
 [tool.setuptools]
 include-package-data = true
@@ -77,22 +79,10 @@ write_to = "src/version.py"
 branch = true
 source = ["src"]
 
-[tool.mypy]
-disallow_incomplete_defs = true
-disallow_untyped_defs = true
-files = [
-    "**/*.py",
-    "**/*.pyi",
-]
-show_error_codes = true
-warn_unused_configs = true
-
-[[tool.mypy.overrides]]
-ignore_missing_imports = true
-module = ["pybtex.*"]
-
-[tool.poe]
-executor.type = "uv"
+[tool.poe.executor]
+isolated = true
+no-group = "dev"
+type = "uv"
 
 [tool.poe.tasks.all]
 help = "Run all continuous integration (CI) tasks locally"
@@ -100,27 +90,9 @@ ignore_fail = "return_non_zero"
 sequence = ["style"]
 
 [tool.poe.tasks.style]
-cmd = "uv run --group style --isolated --no-dev pre-commit run --all-files"
+cmd = "pre-commit run --all-files"
+executor = {group = "style"}
 help = "Perform all linting, formatting, and spelling checks"
-
-[tool.pyright]
-reportGeneralTypeIssues = false
-reportMissingImports = false
-reportMissingParameterType = false
-reportMissingTypeArgument = false
-reportUnboundVariable = false
-reportUnknownArgumentType = false
-reportUnknownMemberType = false
-reportUnknownParameterType = false
-reportUnknownVariableType = false
-reportUntypedFunctionDecorator = false
-reportUnusedClass = true
-reportUnusedFunction = true
-reportUnusedImport = true
-reportUnusedVariable = true
-typeCheckingMode = "strict"
-venv = ".venv"
-venvPath = "."
 
 [tool.ruff]
 extend-include = ["*.ipynb"]
@@ -158,6 +130,7 @@ ignore = [
     "PLW1514",
     "PT001",
     "PTH",
+    "RUF067",
     "SIM108",
     "UP036",
 ]
@@ -194,7 +167,6 @@ split-on-trailing-comma = false
 "tests/*" = [
     "D",
     "INP001",
-    "PGH001",
     "PLR0913",
     "PLR2004",
     "S101",
@@ -215,3 +187,11 @@ sort_first = [
 ]
 spaces_indent_inline_array = 4
 trailing_comma_inline_array = true
+
+[tool.ty.rules]
+division-by-zero = "warn"
+possibly-missing-import = "warn"
+possibly-unresolved-reference = "warn"
+
+[tool.ty.terminal]
+error-on-warning = true
