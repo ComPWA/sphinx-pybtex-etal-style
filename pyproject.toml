@@ -75,6 +75,12 @@ where = ["src"]
 [tool.setuptools_scm]
 write_to = "src/version.py"
 
+[tool.compwa.policy]
+repo-name = "sphinx-pybtex-etal-style"
+
+[tool.compwa.policy.python]
+type-checker = ["ty"]
+
 [tool.coverage.run]
 branch = true
 source = ["src"]
