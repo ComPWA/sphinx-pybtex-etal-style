@@ -1,44 +1,37 @@
-[build-system]
-build-backend = "setuptools.build_meta"
-requires = [
-    "setuptools>=61.2",
-    "setuptools_scm",
-]
-
 [project]
-authors = [{name = "Common Partial Wave Analysis", email = "compwa-admin@ep1.rub.de"}]
-classifiers = [
-    "Development Status :: 3 - Alpha",
-    "Intended Audience :: Developers",
-    "License :: OSI Approved :: BSD License",
-    "Natural Language :: English",
-    "Operating System :: OS Independent",
-    "Programming Language :: Python :: 3.10",
-    "Programming Language :: Python :: 3.11",
-    "Programming Language :: Python :: 3.12",
-    "Programming Language :: Python :: 3.13",
-    "Programming Language :: Python :: 3.14",
-    "Programming Language :: Python",
-    "Topic :: Documentation",
-    "Topic :: Utilities",
-    "Typing :: Typed",
-]
-dependencies = ["pybtex"]
+name = "sphinx-pybtex-etal-style"
 description = "Abbreviate long author lists with et al. in BibTeX bibliographies for Sphinx"
-dynamic = ["version"]
+requires-python = ">=3.10"
+license = "BSD-3-Clause"
+license-files = ["LICENSE"]
+authors = [{ name = "Common Partial Wave Analysis", email = "compwa-admin@ep1.rub.de" }]
+maintainers = [{ email = "compwa-admin@ep1.rub.de" }]
 keywords = [
     "bibliography",
     "bibtex",
     "sphinx",
 ]
-license = {text = "BSD 3-Clause License"}
-maintainers = [{email = "compwa-admin@ep1.rub.de"}]
-name = "sphinx-pybtex-etal-style"
-requires-python = ">=3.10"
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Natural Language :: English",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+    "Topic :: Documentation",
+    "Topic :: Utilities",
+    "Typing :: Typed",
+]
+dependencies = ["pybtex"]
+dynamic = ["version"]
 
 [project.readme]
-content-type = "text/markdown"
 file = "README.md"
+content-type = "text/markdown"
 
 [project.urls]
 Changelog = "https://github.com/ComPWA/sphinx-pybtex-etal-style/releases"
@@ -49,31 +42,29 @@ Source = "https://github.com/ComPWA/sphinx-pybtex-etal-style"
 [dependency-groups]
 dev = [
     "ruff",
-    {include-group = "style"},
+    { include-group = "style" },
 ]
 style = [
     "ty",
-    {include-group = "types"},
+    { include-group = "types" },
 ]
 types = [
     "pybtex-docutils",
     "sphinx",
 ]
 
-[tool.setuptools]
-include-package-data = true
-license-files = ["LICENSE"]
-package-dir = {"" = "src"}
+[build-system]
+requires = [
+    "setuptools>=61.2",
+    "setuptools_scm",
+]
+build-backend = "setuptools.build_meta"
 
-[tool.setuptools.package-data]
-"*" = ["py.typed"]
+[tool.compwa.policy]
+repo-name = "sphinx-pybtex-etal-style"
 
-[tool.setuptools.packages.find]
-namespaces = false
-where = ["src"]
-
-[tool.setuptools_scm]
-write_to = "src/version.py"
+[tool.compwa.policy.python]
+type-checker = ["ty"]
 
 [tool.coverage.run]
 branch = true
@@ -91,8 +82,21 @@ sequence = ["style"]
 
 [tool.poe.tasks.style]
 cmd = "pre-commit run --all-files"
-executor = {group = "style"}
+executor = { group = "style" }
 help = "Perform all linting, formatting, and spelling checks"
+
+[tool.poe.tasks.upgrade]
+executor = { type = "simple" }
+help = "Upgrade lock files"
+parallel = ["_upgrade-precommit", "_upgrade-uv"]
+
+[tool.poe.tasks._upgrade-precommit]
+cmd = "pre-commit autoupdate -j8"
+executor = { type = "simple" }
+
+[tool.poe.tasks._upgrade-uv]
+cmd = "uv lock --upgrade"
+executor = { type = "simple" }
 
 [tool.ruff]
 extend-include = ["*.ipynb"]
@@ -138,7 +142,7 @@ select = ["ALL"]
 task-tags = ["cspell"]
 
 [tool.ruff.lint.flake8-builtins]
-builtins-ignorelist = ["display"]
+ignorelist = ["display"]
 
 [tool.ruff.lint.flake8-comprehensions]
 allow-dict-calls-with-keyword-arguments = true
@@ -175,18 +179,31 @@ split-on-trailing-comma = false
 [tool.ruff.lint.pydocstyle]
 convention = "google"
 
-[tool.tomlsort]
-all = false
-ignore_case = true
-in_place = true
-sort_first = [
-    "build-system",
-    "project",
-    "tool.setuptools",
-    "tool.setuptools_scm",
-]
-spaces_indent_inline_array = 4
-trailing_comma_inline_array = true
+[tool.setuptools]
+include-package-data = true
+package-dir = { "" = "src" }
+
+[tool.setuptools.package-data]
+"*" = ["py.typed"]
+
+[tool.setuptools.packages.find]
+namespaces = false
+where = ["src"]
+
+[tool.setuptools_scm]
+version_file = "src/version.py"
+
+[tool.tombi.format.rules]
+indent-width = 4
+line-width = 88
+
+[tool.tombi.lint.rules]
+key-empty = "off"
+
+[[tool.tombi.schemas]]
+root = "tool.compwa.policy"
+path = "https://raw.githubusercontent.com/ComPWA/policy/0.9.0/compwa-policy.schema.json"
+include = ["pyproject.toml"]
 
 [tool.ty.rules]
 division-by-zero = "warn"
