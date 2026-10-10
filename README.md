@@ -3,7 +3,7 @@
 [![PyPI package](https://badge.fury.io/py/sphinx-pybtex-etal-style.svg)](https://pypi.org/project/sphinx-pybtex-etal-style)
 [![Supported Python versions](https://img.shields.io/pypi/pyversions/sphinx-pybtex-etal-style)](https://pypi.org/project/sphinx-pybtex-etal-style)
 [![BSD 3-Clause license](https://img.shields.io/badge/License-BSD_3--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
-[![Open in Visual Studio Code](https://img.shields.io/badge/vscode-open-blue?logo=visualstudiocode)](https://open.vscode.dev/ComPWA/sphinx-pybtex-etal-style)
+[![Open in Visual Studio Code](https://img.shields.io/badge/vscode-open-blue?logo=visualstudiocode)](https://github.dev/ComPWA/sphinx-pybtex-etal-style)
 [![CI status](https://github.com/ComPWA/sphinx-pybtex-etal-style/workflows/CI/badge.svg)](https://github.com/ComPWA/sphinx-pybtex-etal-style/actions?query=branch%3Amain+workflow%3ACI)
 [![pre-commit.ci status](https://results.pre-commit.ci/badge/github/ComPWA/sphinx-pybtex-etal-style/main.svg)](https://results.pre-commit.ci/latest/github/ComPWA/sphinx-pybtex-etal-style/main)
 [![Spelling checked](https://img.shields.io/badge/cspell-checked-brightgreen.svg)](https://github.com/streetsidesoftware/cspell/tree/main/packages/cspell)
