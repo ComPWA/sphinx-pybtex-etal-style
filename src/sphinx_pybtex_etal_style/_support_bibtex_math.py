@@ -10,18 +10,18 @@ from __future__ import annotations
 import codecs
 
 import docutils.nodes
-import latexcodec  # noqa: F401
+import latexcodec  # ruff: ignore[unused-import]
 from pybtex.markup import LaTeXParser
 from pybtex.richtext import Protected, String, Text
 from pybtex.scanner import Literal, PybtexSyntaxError
 
 
 @classmethod
-def patch_from_latex(cls, latex: str) -> LaTeXMathParser:  # noqa: ARG001
+def patch_from_latex(cls, latex: str) -> LaTeXMathParser:  # ruff: ignore[unused-function-argument]
     return LaTeXMathParser(codecs.decode(latex, "ulatex")).parse()  # ty:ignore[no-matching-overload]
 
 
-def patch_format_math(self, text: list[Text]) -> list[docutils.nodes.math]:  # noqa: ARG001
+def patch_format_math(self, text: list[Text]) -> list[docutils.nodes.math]:  # ruff: ignore[unused-function-argument]
     return [docutils.nodes.math("", "", *text)]
 
 
@@ -40,7 +40,7 @@ class Math(Protected):
 class LaTeXMathParser(LaTeXParser):
     DOLLAR = Literal("$")
 
-    def iter_string_parts(self, level=0, in_math=False):  # noqa: C901, PLR0912
+    def iter_string_parts(self, level=0, in_math=False):  # ruff: ignore[complex-structure, too-many-branches]
         while True:
             if in_math:
                 token = self.skip_to([self.DOLLAR])

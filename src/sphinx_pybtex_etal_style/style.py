@@ -9,7 +9,7 @@ from pybtex.style.formatting.unsrt import Style as UnsrtStyle
 from pybtex.style.template import (
     FieldIsMissing,
     Node,
-    _format_list,  # noqa: PLC2701
+    _format_list,  # ruff: ignore[import-private-name]
     field,
     href,
     join,
@@ -35,9 +35,9 @@ def et_al(children, data, sep="", sep2=None, last_sep=None):
     parts = [part for part in _format_list(children, data) if part]
     if len(parts) <= 1:
         return Text(*parts)
-    if len(parts) == 2:  # noqa: PLR2004
+    if len(parts) == 2:  # ruff: ignore[magic-value-comparison]
         return Text(sep2).join(parts)
-    if len(parts) == 3:  # noqa: PLR2004
+    if len(parts) == 3:  # ruff: ignore[magic-value-comparison]
         return Text(last_sep).join([Text(sep).join(parts[:-1]), parts[-1]])
     return Text(parts[0], Tag("em", " et al"))
 
@@ -66,7 +66,7 @@ class UnsrtEtAl(UnsrtStyle):
     def __init__(self) -> None:
         super().__init__(abbreviate_names=True)
 
-    def format_names(self, role: Entry, as_sentence: bool = True) -> Node:  # noqa: PLR6301
+    def format_names(self, role: Entry, as_sentence: bool = True) -> Node:  # ruff: ignore[no-self-use]
         formatted_names = names(role, sep=", ", sep2=" and ", last_sep=", and ")
         if as_sentence:
             return sentence[formatted_names]
@@ -77,7 +77,7 @@ class UnsrtEtAl(UnsrtStyle):
             return ""  # ty:ignore[invalid-return-type]
         return super().format_eprint(e)
 
-    def format_url(self, e: Entry) -> Node:  # noqa: PLR6301
+    def format_url(self, e: Entry) -> Node:  # ruff: ignore[no-self-use]
         if e.fields is None or "doi" in e.fields or "eprint" in e.fields:
             return ""  # ty:ignore[invalid-return-type]
         return words[
@@ -87,7 +87,7 @@ class UnsrtEtAl(UnsrtStyle):
             ]
         ]
 
-    def format_isbn(self, e: Entry) -> Node:  # noqa: ARG002
+    def format_isbn(self, e: Entry) -> Node:  # ruff: ignore[unused-method-argument]
         raw_isbn = field("isbn", raw=True, apply_func=remove_dashes_and_spaces)
         if self.isbn_resolver == "bookfinder":
             url = join[
