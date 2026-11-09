@@ -40,4 +40,4 @@ def register_math_support(app: Sphinx, __: BuildEnvironment) -> None:
         return
     Text.from_latex = patch_from_latex  # ty:ignore[invalid-assignment]
     if Backend.default_suffix != ".txt":
-        Backend.format_math = patch_format_math  # ty:ignore[unresolved-attribute]
+        Backend.format_math = patch_format_math  # ty:ignore[missing-attribute]
