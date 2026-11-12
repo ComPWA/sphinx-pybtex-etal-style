@@ -42,10 +42,10 @@ Source = "https://github.com/ComPWA/sphinx-pybtex-etal-style"
 [dependency-groups]
 dev = [
     "ruff",
+    "ty",
     { include-group = "style" },
 ]
 style = [
-    "ty",
     { include-group = "types" },
 ]
 types = [
@@ -63,12 +63,27 @@ build-backend = "setuptools.build_meta"
 [tool.compwa.policy]
 repo-name = "sphinx-pybtex-etal-style"
 
+[tool.compwa.policy.github]
+dependabot-assignees = ["redeboer"]
+
 [tool.compwa.policy.python]
 type-checker = ["ty"]
 
 [tool.coverage.run]
 branch = true
 source = ["src"]
+
+[tool.docstrfmt]
+docstring-trailing-line = false
+format-python-code-blocks = false
+
+[tool.lychee]
+cache = true
+cache_exclude_status = "400.."
+hidden = true
+include_fragments = "anchor-only"
+include_verbatim = true
+max_cache_age = "7d"
 
 [tool.poe.executor]
 isolated = true
@@ -78,7 +93,7 @@ type = "uv"
 [tool.poe.tasks.all]
 help = "Run all continuous integration (CI) tasks locally"
 ignore_fail = "return_non_zero"
-sequence = ["style"]
+sequence = ["style", "linkcheck"]
 
 [tool.poe.tasks.style]
 cmd = "prek run --all-files"
@@ -100,6 +115,11 @@ executor = { type = "simple" }
 [tool.poe.tasks._upgrade-uv]
 cmd = "uv lock --upgrade"
 executor = { type = "simple" }
+
+[tool.poe.groups.doc.tasks.linkcheck]
+cmd = "uvx --from lychee-bin lychee . --quiet"
+executor = { type = "simple" }
+help = "Check links in repository sources (requires internet connection)"
 
 [tool.ruff]
 extend-include = ["*.ipynb"]
@@ -206,7 +226,7 @@ key-empty = "off"
 
 [[tool.tombi.schemas]]
 root = "tool.compwa.policy"
-path = "https://raw.githubusercontent.com/ComPWA/policy/0.10.1/compwa-policy.schema.json"
+path = "https://raw.githubusercontent.com/ComPWA/policy/0.10.7/compwa-policy.schema.json"
 include = ["pyproject.toml"]
 
 [tool.ty.rules]

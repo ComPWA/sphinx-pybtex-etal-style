@@ -1,4 +1,4 @@
-"""Style definition for :code:`unsrt_etal`."""
+"""Style definition for ``unsrt_etal``."""
 
 from __future__ import annotations
 

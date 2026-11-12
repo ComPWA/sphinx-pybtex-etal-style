@@ -1,8 +1,10 @@
 # cspell:ignore bibtex latexcodec pybtex sphinxcontrib ulatex
 """Enable math mode in `sphinxcontrib-bibtex`.
 
-.. note:: The source code below is inspired by
-  https://gitlab.com/Molcas/OpenMolcas/-/blob/c6e64d/doc/source/molcas.bib#L2745
+.. note::
+
+    The source code below is inspired by
+    https://gitlab.com/Molcas/OpenMolcas/-/blob/c6e64d/doc/source/molcas.bib#L2745
 """
 
 from __future__ import annotations
